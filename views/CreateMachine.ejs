@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+	function validate(form) {
+
+var e = document.getElementById("SerialID").value;
+    if(!e) {
+        alert('Please fill out required fields');
+        return false;
+    }
+    
+    else {
+    return true;
+    }
+}
+
+function makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 20; i++){
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+}
+  document.getElementById("MachineSecret").value = text;
+}
+</script>
+</head>
+<body>
+
+
+<%- include Main.ejs %>
+MachineID, Cost, MachineName, NoCharge, MachineSecret, MachinePlays
+<form action="/create-machine" method="post" onsubmit="return validate(this);">
+        
+        <div class="form-group">
+        <label>Register User</label>
+            <p><input type="text" class="form-control" name="MachineID" id="MachineID" placeholder='Machine ID (required)'></p>
+            <p><input type="text" class="form-control" name="MachineName" placeholder='Machine Name (optional)'></p>
+            <p><input type="text" class="form-control" name="Cost" placeholder='Cost'></p>
+            <p><input type="text" class="form-control" name="MachineSecret" id="MachineSecret" placeholder='Machine Secret (optional)'><input type="button" onclick="makeid()" value="Generate String"></p>
+            <p><input type="text" class="form-control" name="MachineSecret" id="MachineSecret" placeholder='Machine Secret (optional)'><input type="button" onclick="makeid()" value="Generate String"></p>
+            <p><input type="text" class="form-control" name="NoCharge" placeholder='Make Machine free'></p>
+            <p><select name="MachineType" id="MachineType">
+             
+		<option value="REG" selected>Regular Machine</option>
+		<option value="T1" >Tier 1 Machine</option>
+		
+		<option value="T2">Tier 2 Machine</option>
+		
+		<option value="T3">Tier 3 Machine</option></select></p>
+		</div>
+               
+        <button type="submit" class="btn btn-warning btn-lg">Create User</button>
+    </form>
+</body>
+</html>

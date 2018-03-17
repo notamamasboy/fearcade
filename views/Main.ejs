@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+	function validate(form) {
+
+var e = document.getElementById("SerialID").value;
+    if(!e) {
+        alert('Please fill out required fields');
+        return false;
+    }
+    
+    else {
+    return true;
+    }
+}
+</script>
+</head>
+<body>
+	<ul>
+		<li><a href="/view-all-accounts">View All Account</a></li>
+		<li><a href="/create-account">Create Account</a></li>
+		<li><a href="/view-all-machines">View All Machines</a></li>
+		
+		<li><a href="/create-machine">Create Machine</a></li>
+		<li><a href="/view-all-transactions">View Transactions</a></li>
+		<li><a href="/SimulateCharge">Simulate Charge</a></li>
+		<ul>
+</body>
+</html>

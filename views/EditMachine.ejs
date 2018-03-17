@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+	function validate(form) {
+
+var e = document.getElementById("MachineID").value;
+    if(!e) {
+        alert('Please fill out required fields');
+        return false;
+    }
+    
+    else {
+    return true;
+    }
+}
+
+function makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 20; i++){
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+}
+  document.getElementById("MachineSecret").value = text;
+}
+
+</script>
+</head>
+<body>
+
+
+<%- include Main.ejs %>
+
+<form action="/edit-machine" method="post" onsubmit="return validate(this);">
+        
+        <div class="form-group">
+        <label>Register Machine</label>
+            <p><input type="text" class="form-control" name="MachineID" id="MachineID" placeholder='Machine ID (required)' value='<%= j[0].MachineID ? j[0].MachineID : "" %>'></p>
+            <p style="display:none;"><input type="text" class="form-control" name="origMachineID" id="origMachineID" placeholder='Machine ID (required)' value='<%= j[0].MachineID ? j[0].MachineID : "" %>'></p>
+            <p><input type="text" class="form-control" name="MachineName" placeholder='Machine Name (optional)' value='<%= j[0].MachineName ? j[0].MachineName : "" %>'></p>
+            <p><input type="text" class="form-control" name="Cost" placeholder='Cost' value='<%= j[0].Cost ? j[0].Cost : "" %>'></p>
+            <p><input type="text" class="form-control" name="NoCharge" placeholder='NoCharge' value='<%= j[0].NoCharge ? j[0].NoCharge : "" %>'></p>
+            <p><input type="text" class="form-control" name="MachineSecret" id="MachineSecret" placeholder='Machine Secret (optional)' value='<%= j[0].MachineSecret ? j[0].MachineSecret : "" %>'><input type="button" onclick="makeid()" value="Generate NEW String"></p>
+            <p><input type="text" class="form-control" name="MachinePlays" placeholder='Play Count (optional)' value='<%= j[0].MachinePlays ? j[0].MachinePlays : "" %>'></p>
+            <p><select name="MachineType" id="MachineType">
+             
+		<option value="REG"  <%= j[0].MachineType == "T1" ? "selected" : "" %>>Regular Machine</option>
+		<option value="T1"  <%= j[0].MachineType == "T1" ? "selected" : "" %>>Tier 1 Machine</option>
+		
+		<option value="T2" <%= j[0].MachineType == "T1" ? "selected" : "" %>>Tier 2 Machine</option>
+		
+		<option value="T3" <%= j[0].MachineType == "T1" ? "selected" : "" %>>Tier 3 Machine</option></select></p>
+		</div>
+               
+        <button type="submit" class="btn btn-warning btn-lg">Create User</button>
+    </form>
+</body>
+</html>

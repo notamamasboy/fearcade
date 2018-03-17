@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+	function validate(form) {
+var e = document.getElementById("SerialID").value;
+    if(!e) {
+        alert('Please fill out required fields');
+        return false;
+    }
+    
+    else {
+    return true;
+    }
+}
+</script>
+</head>
+<body>
+
+
+<%- include Main.ejs %>
+<form action="/SimulateResults" method="post" onsubmit="return validate(this);">
+        
+        <div class="form-group">
+        <label>Register User</label>
+            <p><input type="text" class="form-control" name="SerialID" id="SerialID" placeholder='Serial ID'></p>
+            <p><input type="text" class="form-control" name="MachineID" placeholder='MachineID'></p>
+            <p><input type="text" class="form-control" name="MachineSecret" placeholder='MachineSecret'></p>
+            
+		</div>
+               
+        <button type="submit" class="btn btn-warning btn-lg">See Results</button>
+    </form>
+</body>
+</html>

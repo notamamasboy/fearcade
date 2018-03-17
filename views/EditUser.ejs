@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+	function validate(form) {
+var e = document.getElementById("SerialID").value;
+    if(!e) {
+        alert('Please fill out required fields');
+        return false;
+    }
+    
+    else {
+    return true;
+    }
+}
+</script>
+</head>
+<body>
+
+
+<%- include Main.ejs %>
+<form action="/edit-account" method="post" onsubmit="return validate(this);">
+        
+        <div class="form-group">
+        <label>Register User</label>
+            <p><input type="text" class="form-control" name="SerialID" id="SerialID" placeholder='Serial ID (required)' value='<%= j[0].SerialID ? j[0].SerialID : "" %>'></p>
+            <p style="display:none"><input type="text" class="form-control" name="origSerialID" id="origSerialID" placeholder='Serial ID (required)' value='<%= j[0].SerialID ? j[0].SerialID : "" %>'></p>
+            <p><input type="text" class="form-control" name="Balance" placeholder='Initial Balance' value='<%= j[0].Balance ? j[0].Balance : "" %>'></p>
+            <p><input type="text" class="form-control" name="email" placeholder='email (optional)' value='<%= j[0].email ? j[0].email : "" %>'></p>
+            <p><select name="AccType" id="AccType">
+             <option value="REG" <%= j[0].AccType == "REG" ? "selected" : "" %>>Regular Account</option>
+		<option value="SERVICE" <%= j[0].AccType == "SERVICE" ? "selected" : "" %>>Service Account</option>
+		
+		<option value="T1" <%= j[0].AccType == "T1" ? "selected" : "" %>>Tier 1 Account</option>
+		
+		<option value="T2" <%= j[0].AccType == "T2" ? "selected" : "" %>>Tier 2 Account</option>
+		
+		<option value="T3" <%= j[0].AccType == "T3" ? "selected" : "" %>>Tier 3 Account</option></select></p>
+		</div>
+               
+        <button type="submit" class="btn btn-warning btn-lg">Create User</button>
+    </form>
+</body>
+</html>

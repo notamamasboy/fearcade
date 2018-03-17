@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    
+</head>
+<body>
+<div id="songs-count"><%= JSON.stringify(data) %></div>
+<button onclick='reloadData()'> Reload me! </button>
+<script type='text/javascript'> 
+  function reloadData() {
+    var xmlhttp = new XMLHttpRequest();
+	 xmlhttp.open("GET", "/raw-songinfo", true);
+	xmlhttp.send();
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+        if(xmlhttp.status == 200){
+          // Update the data in your app somehow...
+          // example:
+		 
+          var responseData = JSON.parse(xmlhttp.responseText);
+          document.getElementById('songs-count').innerHTML = JSON.stringify(responseData);
+        } else {
+          alert('something went wrong!');
+        }
+      }
+    }
+  }
+</script>
+</body>
+</html>
